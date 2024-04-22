@@ -17,12 +17,13 @@ interface DetailsScreenProps {
 }
 
 const DetailsScreen: React.FC<DetailsScreenProps> = ({route, navigation}) => {
-  const {movieId} = route.params;
+  const {movieId} = route.params; // Getting movieId from navigation parameter
   const [movieDetails, setMovieDetails] =
     useState<MovieDetailsInterface | null>(null);
 
   const dispatch = useDispatch<ThunkDispatch<RootState, void, Action>>();
 
+  // Check internet connectivity before making API calls
   const checkInternetConnection = async () => {
     const isConnected = await checkConnection();
     if (!isConnected) {
@@ -37,6 +38,7 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({route, navigation}) => {
     dispatch(fetchMovies());
   }, [dispatch]);
 
+  // Fetch movie details when the component is mounted or when movieId changes
   useEffect(() => {
     const fetchDetails = async () => {
       try {

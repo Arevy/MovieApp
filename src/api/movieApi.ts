@@ -1,12 +1,11 @@
-import axios, {AxiosError} from 'axios';
+import axios from 'axios';
 import {MovieDetailsInterface} from 'src/interfaces/MovieInterface';
 
-// const apiKey = 'your_api_key_here'; // Replace with your actual TMDB API key
-const apiKey =
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyOGMyM2JiZWE2YzliMWE2MmZhNmQ1MDBjYmI5Zjk0YSIsInN1YiI6IjY2MjNhOWU5N2E5N2FiMDE0YThiYWE5ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZPVYKo-e9SBguxpX5rdV9nQ7D6kMl4AtUBMMreJTDaE';
+const apiKey = 'YOUR_API_KEY_HERE'; // TMDB API key
 
 const baseUrl = 'https://api.themoviedb.org/3';
 
+// Fetch popular movies list
 export const getPopularMovies = async () => {
   const response = await axios.get(
     `${baseUrl}/movie/popular?api_key=${apiKey}&language=en-US&page=1`,
@@ -14,6 +13,7 @@ export const getPopularMovies = async () => {
   return response.data.results;
 };
 
+// Fetch detailed information about a specific movie by its ID
 export const getMovieDetails = async (id: number) => {
   const response = await axios.get(
     `${baseUrl}/movie/${id}?api_key=${apiKey}&language=en-US`,
@@ -21,6 +21,7 @@ export const getMovieDetails = async (id: number) => {
   return response.data;
 };
 
+// Fetch extended movie details including credits and reviews
 export const getMovieDetailsExtended = async (id: number) => {
   try {
     const response = await axios.get(

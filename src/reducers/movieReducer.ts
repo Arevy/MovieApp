@@ -4,14 +4,17 @@ import {
   FETCH_MOVIES_FAILURE,
 } from '../actions/movieActions';
 import {MovieInterface} from '../interfaces/MovieInterface';
+
+// State type definition for movie data
 interface MovieState {
-  movies: MovieInterface[];
-  loading: boolean;
-  error: any;
-  page: number;
-  hasMore: boolean;
+  movies: MovieInterface[]; // List of movies
+  loading: boolean; // Loading state indicator
+  error: any; // Error state
+  page: number; // Current page of movie data
+  hasMore: boolean; // Indicator if more movies are available
 }
 
+// Initial state for movie data
 const initialState: MovieState = {
   movies: [],
   loading: false,
@@ -20,16 +23,14 @@ const initialState: MovieState = {
   hasMore: true,
 };
 
+// Movie reducer that handles actions related to movie data
 const movieReducer = (state = initialState, action: any): MovieState => {
   switch (action.type) {
     case FETCH_MOVIES:
-      // Resetăm lista și pagina când începem o nouă căutare
-      if (action.page === 1) {
-        return {...initialState, loading: true};
-      }
+      // Reset list and page when starting a new fetch
       return {...state, loading: true};
     case FETCH_MOVIES_SUCCESS:
-      // Concatenăm numai filme noi și actualizăm pagina și hasMore
+      // Only append new movies and update page and hasMore status
       const newMovies = action.payload.filter(
         (movie: MovieInterface) => !state.movies.some(m => m.id === movie.id),
       );

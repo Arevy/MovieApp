@@ -1,14 +1,16 @@
-import axios, {AxiosError} from 'axios';
+import axios from 'axios';
 import {Dispatch} from 'redux';
 
+// Action types for managing movie data fetch states
 export const FETCH_MOVIES = 'FETCH_MOVIES';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 
-const apiKey =
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyOGMyM2JiZWE2YzliMWE2MmZhNmQ1MDBjYmI5Zjk0YSIsInN1YiI6IjY2MjNhOWU5N2E5N2FiMDE0YThiYWE5ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZPVYKo-e9SBguxpX5rdV9nQ7D6kMl4AtUBMMreJTDaE';
+// TMDB API key, normally you would keep this secure and not hard-coded
+const apiKey = 'YOUR_API_KEY_HERE';
 
-export const fetchMovies = (query: string = '', page: number = 1) => {
+// Fetch movies either by query or popular ones if no query is provided
+export const fetchMovies = (query = '', page = 1) => {
   return async (dispatch: Dispatch) => {
     dispatch({type: FETCH_MOVIES});
     try {

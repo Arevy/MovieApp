@@ -1,12 +1,12 @@
-// src/components/MovieCard.tsx
+// React component for rendering a single movie card in a list
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {MovieInterface} from '../interfaces/MovieInterface';
 
 interface MovieCardProps {
-  movie: MovieInterface;
-  onPress: (movieId: number) => void; // Funcția de navigare la detalii
-  onFavoritePress: (movieId: number) => void; // Funcția de adăugare la favorite
+  movie: MovieInterface; // Movie data to display
+  onPress: (movieId: number) => void; // Callback for when movie is pressed
+  onFavoritePress: (movieId: number) => void; // Callback for when favorite button is pressed
 }
 
 export const MovieCard: React.FC<MovieCardProps> = ({
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 5,
-    backgroundColor: '#0066cc', // culoare vibrantă pentru buton
+    backgroundColor: '#0066cc',
     borderRadius: 5,
   },
   buttonText: {

@@ -36,21 +36,25 @@ const HomeScreen = () => {
   const [isConnected, setIsConnected] = useState(true);
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
+  // Handling movie selection for navigation to details screen
   const handlePressMovie = (movieId: number) => {
     navigation.navigate('Details', {movieId});
   };
 
+  // Handling addition to favorites
   const handleAddFavorite = (movieId: number) => {
     console.log('Added to favorites:', movieId);
     Alert.alert('Added to Favorites', `Movie ID: ${movieId}`);
   };
 
-  
+  // Trigger fetching more movies when the end of the list is reached
   const loadMoreMovies = () => {
     if (!loading && hasMore) {
       dispatch(fetchMovies(searchQuery, movies.length / 20 + 1)); // Assuming each page has 20 movies
     }
   };
+
+  // Handling search initiation
   const handleSearch = () => {
     dispatch(fetchMovies(searchQuery, 1)); // Always search from the first page
     useEffect(() => {
@@ -61,6 +65,7 @@ const HomeScreen = () => {
     }, [searchQuery, dispatch]);
   };
 
+  // Monitor internet connectivity and adjust UI accordingly
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
       setIsConnected(state.isConnected ?? false);
@@ -72,6 +77,7 @@ const HomeScreen = () => {
     return () => unsubscribe();
   }, []);
 
+  // Attempt to fetch movies depending on connectivity and search status
   useEffect(() => {
     const fetchMoviesIfNeeded = async () => {
       const isConnected = await checkConnection();
@@ -94,6 +100,7 @@ const HomeScreen = () => {
     fetchMoviesIfNeeded();
   }, [dispatch, searchQuery]);
 
+  // Save current movies to local storage for offline access
   useEffect(() => {
     if (movies.length > 0) {
       saveMoviesToStorage(movies);
@@ -139,16 +146,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#f4f4f8', // un fond mai deschis
+    backgroundColor: '#f4f4f8', // A light background color
   },
   input: {
     height: 40,
     margin: 12,
-    borderWidth: 0, // eliminăm border-ul
+    borderWidth: 0, // Removing the border
     padding: 10,
-    borderRadius: 20, // borduri rotunjite
-    backgroundColor: '#fff', // fundal alb pentru input
-    shadowColor: '#000', // adăugăm o umbră
+    borderRadius: 20, // Rounded borders
+    backgroundColor: '#fff', // White background for the input
+    shadowColor: '#000', // Adding a shadow
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 6,
@@ -168,12 +175,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: 'transparent', // buton transparent
+    backgroundColor: 'transparent', // Transparent button
     borderColor: '#0066cc',
     borderWidth: 1,
-    borderRadius: 20, // borduri rotunjite pentru buton
-    marginHorizontal: 100, // margini laterale pentru a restrânge butonul
-    marginTop: 10, // spațiu deasupra butonului
+    borderRadius: 20, // Rounded borders for the button
+    marginHorizontal: 100, // Side margins to narrow the button
+    marginTop: 10, // Space above the button
   },
 });
 
