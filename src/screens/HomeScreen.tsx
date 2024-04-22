@@ -57,14 +57,14 @@ const HomeScreen = () => {
   // Handling search initiation
   const handleSearch = () => {
     dispatch(fetchMovies(searchQuery, 1)); // Always search from the first page
-    useEffect(() => {
-      if (!searchQuery) {
-        // Load initial or refreshed movies only if not searching
-        dispatch(fetchMovies('', 1)); // Load first page
-      }
-    }, [searchQuery, dispatch]);
   };
 
+  useEffect(() => {
+    if (!searchQuery) {
+      // Load initial or refreshed movies only if not searching
+      dispatch(fetchMovies('', 1)); // Load first page
+    }
+  }, [searchQuery, dispatch]);
   // Monitor internet connectivity and adjust UI accordingly
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
