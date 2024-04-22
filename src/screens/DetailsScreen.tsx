@@ -1,12 +1,12 @@
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, Alert, ScrollView, StyleSheet} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {Text, Image, Alert, ScrollView, StyleSheet} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {RootStackParamList} from '../navigation/AppNavigator';
 import {getMovieDetailsExtended} from '../api/movieApi';
 import {fetchMovies} from '../actions/movieActions';
-import {checkConnection} from '../utils/network';
+import {checkConnection, loadMoviesFromStorage} from '../utils/network';
 import {Action, ThunkDispatch} from '@reduxjs/toolkit';
 import {RootState} from 'src/store/configureStore';
 import {MovieDetailsInterface} from 'src/interfaces/MovieInterface';
@@ -53,6 +53,20 @@ const DetailsScreen: React.FC<DetailsScreenProps> = ({route, navigation}) => {
     };
 
     fetchDetails();
+  }, [movieId]);
+
+  useEffect(() => {
+    const fetchMovieDetails = async () => {
+      const movies = await loadMoviesFromStorage();
+      const movie = movies.find(m => m.id === movieId);
+      if (movie) {
+        setMovieDetails(movie);
+      } else {
+        console.log('Movie details not found in storage');
+      }
+    };
+
+    fetchMovieDetails();
   }, [movieId]);
 
   if (!movieDetails) return <Text>Loading details...</Text>;

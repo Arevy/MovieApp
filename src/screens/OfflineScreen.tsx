@@ -18,13 +18,14 @@ const OfflineScreen = () => {
   const navigation = useNavigation<OfflineScreenNavigationProp>();
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    async function fetchMovies() {
       const storedMovies = await loadMoviesFromStorage();
       if (storedMovies && Array.isArray(storedMovies)) {
         setMovies(storedMovies);
+      } else {
+        console.log('No stored movies found or incorrect format');
       }
-    };
-
+    }
     fetchMovies();
   }, []);
 
