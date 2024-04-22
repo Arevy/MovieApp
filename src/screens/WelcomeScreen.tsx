@@ -46,7 +46,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({navigation}) => {
       <Animated.View style={[styles.box, animatedStyles]}>
         <Button
           title="Go to Movies"
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('Movies')} // Updated to navigate to 'Movies' which is the stack navigator
           color="#FFFFFF" // Optional: Change button text color for visibility
         />
       </Animated.View>

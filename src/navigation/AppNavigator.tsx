@@ -8,10 +8,11 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 
 export type RootStackParamList = {
-  Home: undefined;
-  Details: {movieId: number};
-  Offline: undefined;
-  Welcome: undefined;
+  Home: undefined; // Main entry point for Home Stack Navigator
+  Details: {movieId: number}; // Details about a specific movie
+  Offline: undefined; // Offline screen
+  Welcome: undefined; // Welcome or landing screen
+  Movies: undefined; // Navigator that contains the Home and Details screens
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -19,8 +20,12 @@ const Drawer = createDrawerNavigator<RootStackParamList>();
 
 const HomeStackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Home" >
-      <Stack.Screen name="Home" component={HomeScreen}options={{title: 'Movies'}} />
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{title: 'Movies'}}
+      />
       <Stack.Screen
         name="Details"
         component={DetailsScreen}
@@ -34,7 +39,11 @@ const AppNavigator = () => {
   return (
     <Drawer.Navigator initialRouteName="Welcome">
       <Drawer.Screen name="Welcome" component={WelcomeScreen} />
-      <Drawer.Screen name="Home" component={HomeStackNavigator} />
+      <Drawer.Screen
+        name="Movies"
+        component={HomeStackNavigator}
+        options={{title: 'Movies'}}
+      />
       <Drawer.Screen name="Offline" component={OfflineScreen} />
     </Drawer.Navigator>
   );
