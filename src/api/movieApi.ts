@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {MovieDetailsInterface} from 'src/interfaces/MovieInterface';
 
-const apiKey = 'YOUR_API_KEY_HERE'; // TMDB API key
+const apiKey = '28c23bbea6c9b1a62fa6d500cbb9f94a'; // TMDB API key
 
 const baseUrl = 'https://api.themoviedb.org/3';
 
