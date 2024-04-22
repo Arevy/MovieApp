@@ -7,7 +7,7 @@ export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 
 // TMDB API key, normally you would keep this secure and not hard-coded
-const apiKey = 'YOUR_API_KEY_HERE';
+const apiKey = '28c23bbea6c9b1a62fa6d500cbb9f94a';
 
 // Fetch movies either by query or popular ones if no query is provided
 export const fetchMovies = (query = '', page = 1) => {

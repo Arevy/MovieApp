@@ -36,7 +36,7 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "react-native.config.js"  ],
   "exclude": [
     "node_modules",
     "babel.config.js",
